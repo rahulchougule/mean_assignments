@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Registration </title>
+</head>
+<body>
+    <div class="container">
+        
+            <div class="form" name="userRegistration">
+            <div class="col-md-6">
+            <label for="txtName"> Your Name </label>
+            <input type="text" id="txtName" class="form-control" [(ngModel)]="user.UserName">
+                </div>
+            
+            
+            <div class="col-md-6" name ="passwords"> 
+            <label for="txtPassword"> Your Password </label>
+            <input type="password" 
+            name="txtPassword" 
+            
+            class="form-control"
+            [(ngModel)]="user.Password">
+            </div>
+            
+            <div class="col-md-6">
+            <label for="txtConfirmPassword" > Confirm Password </label>
+            <input type="password" 
+             name="txtConfirmPassword"
+             class="form-control"
+             >
+            </div>
+             
+    
+
+
+            <div class="col-md-6">
+            <br>
+            <input type="button" value="Register" class="btn btn-success" (click)="registerUser()">
+            <input type="button" class="btn btn-primary" (click)="navigateLogin()" value="Login">
+            </div>
+        </div>
+        
+    </div>
+
+</body>
+</html>

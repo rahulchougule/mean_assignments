@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Product Component</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+    <style>
+    button{margin-left: 10px}
+    #btnnew{background: #000000; color:#fff}
+    </style>
+</head>
+<body>
+
+    <div class="container"> 
+        <div class="form-group ">
+            <label for="prodid">Id</label>
+            <input type="text" name="prodid" id="prodid" class="form-control col-md-4" 
+            [(ngModel)]="product.ProductId">             
+        </div>
+        <div class="form-group">
+            <label for="prodname">Name</label>
+            <input type="text" name="prodname" id="prodname" class="form-control col-md-4"
+             [(ngModel)]="product.ProductName">             
+        </div>
+        <div class="form-group col-md-4">
+              <label for="prodcategory">Category</label> 
+              <select class="form-control " id="prodcategory" 
+              [(ngModel)] ="product.CategoryName" >
+                  <option *ngFor="let c of categories" value="{{c}}"> {{c}}</option>
+              </select> 
+        </div>
+        <div class="form-group">
+            <label for="prodprice">Manufacturer</label>
+            <input type="text" name="manufacturer" id="manufacturer" class="form-control col-md-4" 
+            [(ngModel)] = "product.Manufacturer">       
+
+        </div>
+
+        <div class="form-group">
+            <label for="prodprice">Price</label>
+            <input type="text" name="prodprice" id="prodprice" class="form-control col-md-4" 
+            [(ngModel)] = "product.Price">     
+            
+        </div> 
+        
+        <button id="btnsave" name="btnsave" class="btn btn-success" (click)="save()">  Save </button>
+        <button id="btnnew" name="btnnew"  class="btn" (click)="clear()">  Cancel </button>
+        
+        <!-- <button id="btndelete" name="btndelete"class="btn btn-danger" (click)="delete()">Delete</button> -->
+    </div>
+
+    <div class="container">
+    <div>
+    <!-- <input type="text" name="search" id="search" class="form-control col-md-4" (input)="search($event.target.value)" placeholder="search..."> -->
+   
+    <input [(ngModel)]="name" placeholder="search...">
+    </div>    
+    <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    
+                    <th> Porduct Id</th>
+                    <th> Porduct Name</th>
+                    <th> Porduct Category</th>
+                    <th> Manufacturer</th>
+                    <th> Porduct Price</th>
+                    <th>Action</th>
+                    
+
+                    <!-- <td>
+                        <label> 
+                            <input type="checkbox" (click)="checkAll()" name="all">
+                        </label>
+                     </td>
+                    <td *ngFor="let h of tableHeaders"> {{h}}</td>  -->
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let p of products | filter : name" (click)="getSelectedRow(p)"><!-- every row is generated from products array-->
+                    
+                    <!-- <td *ngFor="let c of tableHeaders">{{p[c]}}</td> every c element of p -->
+                    <td> {{p.ProductId}}</td>
+                    <td> {{p.ProductName}}</td>
+                    <td> {{p.CategoryName}}</td>
+                    <td> {{p.Manufacturer}}</td>
+                    <td> {{p.Price}}</td>
+                    
+                    <td> 
+                            <button id="btnupdate" name="btnupdate" class="btn btn-success" (click)="update()">  Update </button>                
+                        <button id="btnupdate" name="btnupdate" class="btn btn-danger" (click)="delete(p.ProductId)"> Delete </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

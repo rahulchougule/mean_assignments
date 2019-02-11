@@ -1,0 +1,18 @@
+<table class="table table-striped table-bordered">
+        <thead>
+           <tr>
+               <td>Category Id</td>
+               <td>Category Name</td>
+           </tr>
+        </thead>
+        <tbody>
+            <!-- get all categories and onclick selectCategory() is called  -->
+            <tr *ngFor="let cat of categories"   
+            (click)="selectCategory(cat)">
+                <td>{{cat.categoryId}}</td>
+                <td>{{cat.categoryName}}</td>
+            </tr>
+        </tbody>
+   </table>
+
+   <product-data [categoryName]='categoryName'></product-data>

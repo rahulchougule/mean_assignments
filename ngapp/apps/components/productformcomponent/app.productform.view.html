@@ -1,0 +1,148 @@
+<div class="container" [hidden]="!isSaved">
+  <form name="frmProduct" [formGroup]="frmProduct" (submit)="save() ">
+    <div class="form-group">
+      <label for="ProductId">ProductId</label>
+      <!-- <input
+        type="text"
+        name="ProductId"
+        class="form-control"
+        required
+        pattern="[0-9]+"
+        minlength="2"
+        maxlength="5"
+        formControlName="ProductId"
+      /> -->
+      <input
+        type="text"
+        name="ProductId"
+        class="form-control"
+        formControlName="ProductId"
+      />
+      <div
+        *ngIf="
+          frmProduct.controls.ProductId?.dirty && !frmProduct.controls.ProductId.valid "
+        class="alert alert-danger"
+      >
+         
+        <p *ngIf="frmProduct.controls.ProductId?.errors.required">
+          Product Id is Must
+        </p>
+        <p *ngIf="frmProduct.controls.ProductId?.errors.pattern">
+          Product Id Must be numeric
+        </p>
+        <p *ngIf="frmProduct.controls.ProductId?.errors.minlength">
+          Product Id Must be min 2 digits in length
+        </p>
+        <p *ngIf="frmProduct.controls.ProductId?.errors.maxlength">
+          Product Id Must be max 5 digits in length
+        </p>
+        
+        <p *ngIf="frmProduct.controls.ProductId?.errors.notUnique">
+            Duplicate
+          </p>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="ProductName">ProductName</label>
+      <input
+        type="text"
+        name="ProductName"
+        class="form-control"
+        formControlName="ProductName"
+      />
+   
+      <div *ngIf="!!frmProduct.controls.ProductName.dirty && !frmProduct.controls.ProductName.valid"
+      class= "alert alert-danger">
+        <p *ngIf="frmProduct.controls.ProductName.errors.invalid"> First letter must be in upper case </p>
+        <p *ngIf="frmProduct.controls.ProductName.errors.spaces"> Only two blank spaces are allowded </p>
+        <p *ngIf="frmProduct.controls.ProductName.errors.pattern"> Numbers are not allowded in name </p>
+        
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="CategoryName">CategoryName</label>
+      <select
+        class="form-control"
+        name="CategoryName"
+        formControlName="CategoryName"
+      > 
+        <option *ngFor="let c of categories" value="{{ c }}">{{ c }}</option>
+      </select>
+    
+      <div *ngIf="frmProduct.controls.CategoryName.touched && frmProduct.controls.CategoryName.invalid">
+        <p>The name is required.</p>
+
+      </div>
+
+
+    </div>
+
+
+
+    <!--     
+    <div *ngIf="frmProduct.controls.CategoryName.$touched && !frmProduct.controls.CategoryName.valid"
+    class= "alert alert-danger">
+     <p *ngIf="frmProduct.controls.CategoryName.errors.invalid"> Please select category  </p>
+    </div> -->
+     
+     
+    <div class="form-group">
+      <label for="Price">Price</label>
+      <input
+        type="text"
+        class="form-control"
+        name="Price"
+        formControlName="Price"
+      />
+      <div
+        *ngIf="
+          frmProduct.controls.Price.dirty && !frmProduct.controls.Price.valid
+        "
+        class="alert alert-danger"
+      >
+        <p *ngIf="frmProduct.controls.Price.invalid">Price Must be positive</p>
+      </div>
+    </div>
+    <div>
+      <input
+        type="button"
+        value="New"
+        class="btn btn-default"
+        (click)="clear()"
+      />
+      <input
+        type="submit"
+        [disabled]="!frmProduct.valid"
+        value="Save"
+        class="btn btn-success"
+
+      />
+    </div>
+  </form>
+</div>
+<div class="container" [hidden]="isSaved">
+  <table class="table table-bordered table-striped">
+    <thead>
+      <tr>
+        <td *ngFor="let c of tableHeaders">{{ c }}</td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let p of products" (click)="getselectedrow(p)">
+        <td *ngFor="let c of tableHeaders">{{ p[c] }}</td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="4">
+          <input
+            type="button"
+            value="Load Form"
+            (click)="loadForm()"
+            class="btn btn-warning"
+          />
+        </td>
+      </tr>
+    </tfoot>
+  </table>
+</div>
